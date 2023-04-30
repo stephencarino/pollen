@@ -2,7 +2,8 @@ name: run daily data download
 
 on:
   schedule:
-    - cron: "00 03 * * *"    #runs at 3:00 UTC/11PM EST everyday
+    - cron: "00 03 * * *"    #runs at 3:00 UTC/11PM EST everyday    
+  workflow_dispatch:
 
 jobs:
   build:
@@ -22,3 +23,11 @@ jobs:
       - name: execute py script # run file
         run: |
           python run_daily.py
+      #push
+      - name: push files to repo
+        run: |
+          git config user.name github-actions
+          git config user.email "${{secrets.GH_MAIL}}"
+          git add -A
+          git commit -m "updated files"
+          git push
