@@ -29,5 +29,5 @@ jobs:
           git config user.name github-actions
           git config user.email "${{secrets.GH_MAIL}}"
           git add -A
-          git commit -m "updated files"
+          git commit -m "daily update" --allow-empty
           git push
