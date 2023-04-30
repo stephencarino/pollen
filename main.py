@@ -28,6 +28,8 @@ def init_data_files():
     # create data folder
     os.makedirs("./data")
 
+    # to do: create files and header data
+
 
 def get_today() -> str:
     """
