@@ -102,4 +102,4 @@ def get_pollen_data(dateStr):
 
 # init_db()
 # get_pollen_data("4/28/2023")
-print(get_today())
+# print(get_today())
