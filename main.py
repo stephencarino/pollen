@@ -8,8 +8,6 @@ import shutil
 
 BASE_URL = "https://xapps.ncdenr.org/aq/ambient/Pollen.jsp"
 
-baseDate = datetime.datetime.today()
-
 POLLEN_TYPE_FNAME = "./data/pollen-type.csv"
 POLLEN_TOTAL_FNAME = "./data/pollen-total.csv"
 
@@ -28,7 +26,12 @@ def init_data_files():
     # create data folder
     os.makedirs("./data")
 
-    # to do: create files and header data
+    # create files and header data
+    with open(POLLEN_TYPE_FNAME, "w") as f:
+        f.write("Type|Number of Grains|Severity|Pollen Count (Grains/m^3)|Date\n")
+
+    with open(POLLEN_TOTAL_FNAME, "w") as f:
+        f.write("Total (Grains/m^3)|Comments|Date\n")
 
 
 def get_today() -> str:
@@ -38,18 +41,22 @@ def get_today() -> str:
     return datetime.datetime.today().strftime("%m/%d/%Y")
 
 
-def init_db():
+def init_db(startDate: str, endDate: str):
     """
     Create new CSV files
     """
 
     init_data_files()
 
-    numDays = 365 * 15  # get 15 years of data
+    # numDays = 365 * 15  # get 15 years of data
 
-    for x in reversed(range(numDays)):
-        dateStr = (baseDate - datetime.timedelta(days=x + 1)).strftime("%m/%d/%Y")
-        get_pollen_data(dateStr)
+    dateCurrent = datetime.datetime.strptime(startDate, "%m/%d/%Y")
+    dateEnd = datetime.datetime.strptime(endDate, "%m/%d/%Y")
+    delta = datetime.timedelta(days=1)
+
+    while dateCurrent <= dateEnd:
+        get_pollen_data(dateCurrent.strftime("%m/%d/%Y"))
+        dateCurrent += delta
 
 
 def get_pollen_data(dateStr):
