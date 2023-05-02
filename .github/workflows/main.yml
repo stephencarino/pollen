@@ -2,7 +2,9 @@ name: run daily data download
 
 on:
   schedule:
-    - cron: "00 03 * * *"    #runs at 3:00 UTC/11PM EST everyday    
+    - cron: "00 22 * * *"    #runs at 20:00 UTC/6PM EST everyday    
+  
+  workflow_dispatch:
 
 jobs:
   build:
