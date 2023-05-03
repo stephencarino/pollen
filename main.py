@@ -66,13 +66,14 @@ def get_pollen_data(dateStr):
     # dateStr = datetime.datetime.today().strftime("%m/%d/%Y")
 
     try:
-        r = requests.get(f"{BASE_URL}?date={dateStr}").content
+        r = requests.get(f"{BASE_URL}?date={dateStr}")
+        print(f"Status code: {r.status_code}")
     except:
         print(f"No data for {dateStr}.")
         pass
 
     try:
-        data = pd.read_html(r)[0]
+        data = pd.read_html(r.content)[0]
         # segregate total pollen count and comments
         data2 = pd.DataFrame(
             [
