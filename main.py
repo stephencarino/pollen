@@ -67,8 +67,8 @@ def get_pollen_data(dateStr):
 
     try:
         r = requests.get(f"{BASE_URL}?date={dateStr}")
-        print(f"Status code: {r.status_code}")
     except:
+        print(f"Status code: {r.status_code}")
         print(f"No data for {dateStr}.")
         pass
 
