@@ -107,7 +107,7 @@ def get_pollen_data(dateStr):
             quoting=csv.QUOTE_MINIMAL,
             sep="|",
         )
-    except as Exception as e:
+    except Exception as e:
         print(e)
         print(f"No data for {dateStr}")
 
