@@ -67,7 +67,8 @@ def get_pollen_data(dateStr):
 
     try:
         r = requests.get(f"{BASE_URL}?date={dateStr}")
-    except:
+    except Exception as e:
+        print(e)
         print(f"Status code: {r.status_code}")
         print(f"No data for {dateStr}.")
         pass
@@ -106,7 +107,8 @@ def get_pollen_data(dateStr):
             quoting=csv.QUOTE_MINIMAL,
             sep="|",
         )
-    except:
+    except as Exception as e:
+        print(e)
         print(f"No data for {dateStr}")
 
 
